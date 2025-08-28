@@ -4,5 +4,4 @@
 
 Este repositorio contiene tareas y prácticas de la materia.
 
-## Estructura
-- `Practica 0/` — Hola Mundo en C (`hola.c`).
+
