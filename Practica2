@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+int main(void) {
+    // Declaramos un arreglo de 5 enteros
+    int a[5] = {2, 4, 6, 8, 10};
+    
+    // Declaramos un apuntador a entero y lo hacemos apuntar al inicio del arreglo (a[0])
+    int *p = a; // p apunta a la dirección de memoria de a[0]
+
+    // Accedemos al segundo elemento del arreglo directamente con índices
+    printf("1) a[1] = %d\n", a[1]); // Imprime 4, que es el valor en la posición 1
+
+    // Accedemos al cuarto elemento usando aritmética de apuntadores
+    printf("2) *(a+3) = %d\n", *(a+3)); // Imprime 8, ya que a+3 apunta a a[3]
+
+    // *p++ devuelve el valor de *p (a[0] = 2) y después incrementa el apuntador p a la siguiente posición
+    printf("3) *p++ = %d\n", *p++); // Imprime 2, ahora p apunta a a[1]
+
+    // *++p primero incrementa el apuntador p y luego obtiene el valor
+    // p estaba en a[1], ahora apunta a a[2], por lo tanto imprime a[2] = 6
+    printf("4) *++p = %d\n", *++p); // Imprime 6
+
+    // p[1] significa *(p+1). Como p apunta a a[2], p[1] es a[3] = 8
+    printf("5) p[1] = %d\n", p[1]); // Imprime 8
+
+    // (p+=2) mueve el apuntador dos posiciones adelante, ahora apunta a a[4]
+    // Después imprime *(p), es decir el valor en a[4] = 10
+    printf("6) *(p+=2) = %d\n", *(p+=2)); // Imprime 10
+
+    // Restar dos apuntadores devuelve la distancia (en número de elementos) entre ellos
+    // p apunta a a[4] y a apunta a a[0], por lo tanto la diferencia es 4
+    printf("7) p - a = %ld\n", p - a); // Imprime 4
+
+    return 0;
+}
