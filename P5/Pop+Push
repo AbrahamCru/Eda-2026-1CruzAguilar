@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX 5          
+#define MAX_LEN 9      // 8 caracteres + '\0'
+
+typedef struct {
+    char textos[MAX][MAX_LEN];
+    int tope;
+} Pila;
+
+void inicializarPila(Pila *p) {
+    p->tope = -1;
+    printf("Pila inicializada vacia.\n");
+}
+
+int estaLlena(Pila *p) {
+    return p->tope == MAX - 1;
+}
+
+int estaVacia(Pila *p) {
+    return p->tope == -1;
+}
+
+void push(Pila *p, const char *texto) {
+    if (estaLlena(p)) {
+        printf("La pila esta llena, no se puede ingresar mas texto.\n");
+        return;
+    }
+        p->tope++;
+    strncpy(p->textos[p->tope], texto, MAX_LEN - 1);
+    p->textos[p->tope][MAX_LEN - 1] = '\0';
+}
+
+void mostrarPila(Pila *p) {
+    int i;
+    if (estaVacia(p)) {
+        printf("Contenido actual:\n");
+              printf("[Pila vacia]\n");
+        return;
+    }
+
+    printf("Contenido actual:\n");
+       for (i = p->tope; i >= 0; i--) {
+        printf("%s\n", p->textos[i]);
+    }
+}
+
+void pop(Pila *p) {
+    if (estaVacia(p)) {
+        printf("No hay nada para deshacer, la pila esta vacia.\n");
+        return;
+    }
+    printf("Se elimino: %s\n", p->textos[p->tope]);
+     p->tope--;
+}
+
+int main() {
+    Pila pila;
+    int opcion;
+    char palabra[MAX_LEN];
+
+      printf("=== PRACTICA 5: PILA (DESHACER TEXTO) ===\n\n");
+    inicializarPila(&pila);
+
+    do {
+        printf("\n----- MENU ------\n");
+        printf("1. Ingresar texto\n");
+        printf("2. Deshacer texto\n");
+           printf("3. Mostrar texto\n");
+        printf("4. Salir\n");
+        printf("Selecciona una opcion: ");
+        scanf("%d", &opcion);
+        getchar(); 
+        
+        switch (opcion) {
+        case 1:
+            if (estaLlena(&pila)) {
+                printf("La pila esta llena, no se puede ingresar mas texto.\n");
+            } else {
+                printf("Ingrese una palabra (maximo 8 caracteres): ");
+                fgets(palabra, MAX_LEN, stdin);
+                 size_t len = strlen(palabra);
+                if (len > 0 && palabra[len - 1] == '\n') {
+                    palabra[len - 1] = '\0';
+                }
+                push(&pila, palabra);
+            }
+            break;
+        case 2:
+            pop(&pila);
+                break;
+            case 3:
+            mostrarPila(&pila);
+            break;
+        
+        case 4:
+            printf("Saliendo...\n");
+            break;
+        default:
+              printf("Opcion invalida.\n");
+        }
+    } while (opcion != 4);
+
+     printf("\nLa pila funciona como LIFO (ultimo en entrar, primero en salir).\n");
+    return 0;
+}
