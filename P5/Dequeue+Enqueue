@@ -1,0 +1,155 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+#define MAX 5
+#define MAX_NOMBRE 30
+#define MAX_PC 10
+
+typedef struct {
+    char archivo[MAX_NOMBRE];
+     char computadora[MAX_PC];
+    char fechaHora[25];
+} Documento;
+
+typedef struct {
+    Documento docs[MAX];
+        int frente;
+    int final;
+    int cantidad;
+} Cola;
+
+void inicializarCola(Cola *c) {
+        c->frente = 0;
+    c->final = -1;
+    c->cantidad = 0;
+    printf("Cola inicializada vacia.\n");
+}
+
+int colaLlena(Cola *c) {
+    return c->cantidad == MAX;
+}
+
+int colaVacia(Cola *c) {
+    return c->cantidad == 0;
+}
+
+void obtenerFechaHora(char *dest, int tam) {
+    time_t t = time(NULL);
+    struct tm *tm_info = localtime(&t);
+    strftime(dest, tam, "%H:%M:%S", tm_info);
+}
+
+void enqueue(Cola *c, const char *archivo, const char *computadora) {
+    if (colaLlena(c)) {
+             printf("La cola de impresion esta llena, no se puede agregar mas documentos.\n");
+        return;
+    }
+         c->final = (c->final + 1) % MAX;
+    strncpy(c->docs[c->final].archivo, archivo, MAX_NOMBRE - 1);
+         c->docs[c->final].archivo[MAX_NOMBRE - 1] = '\0';
+
+    strncpy(c->docs[c->final].computadora, computadora, MAX_PC - 1);
+    c->docs[c->final].computadora[MAX_PC - 1] = '\0';
+
+             obtenerFechaHora(c->docs[c->final].fechaHora, sizeof(c->docs[c->final].fechaHora));
+
+    c->cantidad++;
+
+    printf("Documento Agregado: %s (desde %s a las %s)\n",
+             c->docs[c->final].archivo,
+             c->docs[c->final].computadora,
+           c->docs[c->final].fechaHora);
+}
+
+void mostrarCola(Cola *c) {
+    if (colaVacia(c)) {
+        printf("La cola de impresion esta vacia.\n");
+        return;
+    }
+
+    printf("Documentos en la cola de impresion:\n");
+    int idx = c->frente;
+         for (int i = 0; i < c->cantidad; i++) {
+        printf("- %s (desde %s a las %s)\n",
+               c->docs[idx].archivo,
+               c->docs[idx].computadora,
+               c->docs[idx].fechaHora);
+        idx = (idx + 1) % MAX;
+    }
+}
+
+void dequeue(Cola *c) {
+    if (colaVacia(c)) {
+        printf("Cola de impresion esta vacia\n");
+        return;
+    }
+
+    Documento d = c->docs[c->frente];
+        printf("Imprimiendo: %s (desde %s a las %s)\n",
+           d.archivo, d.computadora, d.fechaHora);
+
+    c->frente = (c->frente + 1) % MAX;
+    c->cantidad--;
+}
+
+int main() {
+    Cola cola;
+    int opcion;
+        char archivo[MAX_NOMBRE];
+    char computadora[MAX_PC];
+
+    printf("=== PRACTICA 5: COLA (IMPRESORA) ===\n\n");
+    inicializarCola(&cola);
+
+    do {
+        printf("\n----- MENU IMPRESORA -----\n");
+        printf("1. Agregar documento a la cola\n");
+         printf("2. Imprimir documento\n");
+        printf("3. Mostrar documentos en la cola\n");
+        
+         printf("4. Salir\n");
+        printf("Selecciona una opcion: ");
+        scanf("%d", &opcion);
+        getchar(); 
+
+        switch (opcion) {
+        case 1:
+            if (colaLlena(&cola)) {
+                printf("La cola de impresion esta llena.\n");
+            } else {
+                  printf("Ingrese el nombre del archivo: ");
+                fgets(archivo, MAX_NOMBRE, stdin);
+                          size_t lenA = strlen(archivo);
+                if (lenA > 0 && archivo[lenA - 1] == '\n')
+                     archivo[lenA - 1] = '\0';
+
+                printf("Ingrese el nombre de la computadora: ");
+                   fgets(computadora, MAX_PC, stdin);
+                 size_t lenC = strlen(computadora);
+                if (lenC > 0 && computadora[lenC - 1] == '\n')
+                    computadora[lenC - 1] = '\0';
+
+                enqueue(&cola, archivo, computadora);
+            }
+            break;
+            case 2:
+            
+            dequeue(&cola);
+            break;
+        case 3:
+            mostrarCola(&cola);
+            break;
+         case 4:
+            printf("Saliendo...\n");
+             
+                break;
+        default:
+            printf("Opcion invalida.\n");
+        }
+    }    while (opcion != 4);
+
+    printf("\nLa cola funciona como FIFO (primero en entrar, primero en salir).\n");
+    return 0;
+}
