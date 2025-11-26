@@ -1,0 +1,18 @@
+PREGUNTAS:
+1. ¿Por qué las listas enlazadas no requieren tamaño fijo como los arreglos?
+Porque cada nodo se reserva dinámicamente con malloc , permitiendo crecer sin límite fijo.
+
+2. ¿Qué diferencia hay entre mover la cabeza y modificar los punteros internos?
+Mover la cabeza cambia el inicio de la lista; modificar punteros internos altera enlaces entre nodos intermedios.
+
+
+
+PREGUNTAS:
+1. ¿Qué ventaja tiene la lista circular frente a la simple?
+Permite recorridos cíclicos sin reiniciar punteros y facilita ciclos repetitivos.
+
+2. ¿Qué error puede causar un bucle infinito en una lista circular?
+Si no verificas cuándo vuelves a la cabeza, nunca se detiene el recorrido.
+
+3. ¿Qué estructuras reales usan listas circulares?
+Rondas de turnos, buffers circulares, menús cíclicos, sistemas round-robin.
