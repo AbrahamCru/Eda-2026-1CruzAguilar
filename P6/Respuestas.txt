@@ -1,0 +1,41 @@
+Reflexion (A)
+
+¿Por qué en la cola circular no se desperdician posiciones como en la cola lineal?
+
+Porque en la cola circular cuando el índice llega al final del arreglo puede “dar la vuelta” y seguir usando las primeras posiciones otra vez. En cambio, en la cola lineal, cuando final llega al último índice, ya no se pueden usar las posiciones del inicio aunque estén libres.
+
+¿Qué pasa cuando el índice final llega al final del arreglo?
+
+Cuando final llega al último índice, con la fórmula (indice + 1) % MAX vuelve a 0. y quiere decir que el índice se reinicia y empieza de nuevo al inicio del arreglo.
+
+¿Qué sucede si intentas encolar cuando la cola está llena?
+
+Si la cola está llena no debería dejar encolar más elementos y el programa te tendria que decir que no se puede agregar mas elemnentos.
+
+
+
+
+Reflexion (B) 
+
+¿Qué diferencia tiene el deque frente a la cola circular normal?
+
+En una cola circular normal solo podemos insertar por un lado y borrar por el otro digamos que al inicio o alfinal no hay de otra.
+En un deque se puede insertar y borrar por los dos extremos lo que es mas practico.
+
+¿Qué operaciones permiten simular tanto FIFO como LIFO?
+
+Para simular FIFO se puede: insertar por el final (insert_rear) o borrar por el frente (delete_front)
+
+Para simular LIFO (pila) se puede: insertar por el frente (insert_front), borrar por el frente (delete_front) o también usar solo el final (insert_rear + delete_rear).
+
+Investiga qué aplicaciones prácticas tiene deque.
+
+Se puede usar para muchas cosas entre ellas:
+
+Implementar colas donde a veces se necesita meter o sacar por ambos lados.
+
+Algoritmos donde se manejan “ventanas deslizantes” (sliding window) sobre arreglos.
+
+Manejo de historial o “deshacer/rehacer” donde se necesita flexibilidad por ambos extremos.
+
+Estructuras de datos en librerías de lenguajes (deque en C++ STL o en Python).
