@@ -1,0 +1,13 @@
+Parte A – Lista Simple
+
+1. Las listas enlazadas no requieren un tamaño fijo porque cada nodo se crea dinámicamente con malloc. Esto permite que la lista crezca o se reduzca según sea necesario, a diferencia de los arreglos que deben tener un tamaño definido desde el inicio.
+
+2. Mover la cabeza significa cambiar el puntero principal para que ahora apunte al siguiente nodo. En cambio, modificar punteros internos implica ajustar los enlaces entre nodos dentro de la lista sin cambiar la cabeza. Mover la cabeza afecta solo al inicio de la lista; modificar punteros internos afecta nodos intermedios.
+
+Parte B – Lista Circular
+
+1. La ventaja de la lista circular es que permite recorrer los elementos sin necesidad de detectar un final, ya que el último nodo apunta al primero. Esto facilita implementaciones como ciclos continuos o estructuras circulares.
+
+2. Un bucle infinito puede ocurrir si no se establece correctamente la condición de paro al recorrerla, o si se enlaza mal un nodo provocando que el recorrido nunca regrese a la cabeza.
+
+3. Las listas circulares se usan en estructuras como colas de procesos en sistemas operativos, reproducción continua de playlists, turnos de juegos, y cualquier sistema donde el recorrido debe ser cíclico sin fin.
