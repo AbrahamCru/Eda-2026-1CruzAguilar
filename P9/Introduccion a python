@@ -1,0 +1,135 @@
+1) lectura_datos.py
+
+print("Hola, ¿cómo te llamas?")  
+
+nombre = input()   
+
+print("Buen día {}".format(nombre))
+
+print("Calculadora")  
+print("1- Sumar")  
+print("2- Restar")  
+print("3- Multiplicar")  
+print("4- Dividir")  
+print("5- Salir")  
+
+op = int(input("Opcion: "))  
+
+
+
+2) Ejemplo de cadenas
+cadena1 = "Hola"
+cadena2 = "Mundo"
+
+print("Primera: {}, Segunda: {}".format(cadena1, cadena2))
+print("Segunda: {1}, Primera: {0}".format(cadena1, cadena2))
+
+
+3) Ejemplo de listas
+
+lista = [1, 2, "tres", 4.5, [10, 20]]
+
+print(lista)
+print(lista[0])
+print(lista[4])
+print(lista[4][1])
+
+lista.append("nuevo")
+print(lista)
+
+
+4) Ejemplo de tuplas
+
+tupla1 = (1, 2, 3)
+tupla2 = "a", "b", "c"
+
+print(tupla1)
+print(tupla2)
+
+
+5) Ejemplo de diccionarios
+
+dic = {"nombre": "Juan", "edad": 20, "carrera": "Ing"}
+
+print(dic["nombre"])
+print(dic["edad"])
+
+dic["edad"] = 21
+print(dic)
+
+
+6) Ejemplo de funciones
+
+def suma(a, b):
+    return a + b
+
+def operaciones(a, b):
+    suma_res = a + b
+    resta_res = a - b
+    return suma_res, resta_res
+
+x, _ = operaciones(10, 3)
+print(x)
+
+
+7) if – elif – else
+
+x = 20
+
+if x > 30:
+    print("Mayor a 30")
+elif x > 10:
+    print("Mayor a 10")
+else:
+    print("10 o menos")
+
+
+8) Ciclo while
+
+i = 1
+while i <= 5:
+    print(i)
+    i += 1
+
+
+9) Ciclo for
+
+lista = [10, 20, 30]
+
+for elemento in lista:
+    print(elemento)
+
+dic = {"a": 1, "b": 2}
+
+for llave in dic:
+    print(llave, dic[llave])
+
+
+10) Matplotlib ejemplo
+
+import matplotlib.pyplot as plt
+
+valores = [1, 2, 3, 4]
+plt.plot(valores)
+plt.title("Ejemplo de gráfica")
+plt.show()
+
+
+11) Fibonacci recursivo
+
+def fibonacci(n):
+    if n == 1:
+        return 0
+    if n == 2:
+        return 1
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+# Valores solicitados
+posiciones = [7, 21, 40, 71, 94]
+
+for p in posiciones:
+    print("Fibonacci en posición {} = {}".format(p, fibonacci(p)))
+
+
+
+
